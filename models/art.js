@@ -50,6 +50,18 @@ const art_schema = new mongoose.Schema({
       ref: "User",
     },
   ],
+  ongoingBid: {
+    type: Boolean,
+    default: false,
+  },
+  bidId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Bid",
+  },
+  ongoingEvent: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Event",
+  },
 });
 
 const Art = mongoose.model("Art", art_schema);
