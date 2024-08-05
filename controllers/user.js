@@ -35,9 +35,7 @@ exports.create_account = catch_async_err(async (req, res) => {
 });
 
 exports.login_user = catch_async_err(async (req, res) => {
-  const find_user = await User.findOne({ email: req.body.email })
-    .populate("followers")
-    .populate("following");
+  const find_user = await User.findOne({ email: req.body.email });
   if (!find_user) {
     return res.json({
       message: "User Not Found!",
