@@ -22,6 +22,7 @@ const BidSchema = new mongoose.Schema({
   startTime: {
     type: Date,
     required: true,
+    default: Date.now,
   },
   endTime: {
     type: Date,
@@ -52,13 +53,17 @@ const BidSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
-auctionSchema.pre("save", function (next) {
+BidSchema.pre("save", function (next) {
   this.updatedAt = Date.now();
   next();
 });
 
 const Bid = mongoose.model("Bid", BidSchema);
 
-module.exports = Auction;
+module.exports = Bid;
