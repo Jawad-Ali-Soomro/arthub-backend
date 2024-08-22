@@ -18,14 +18,7 @@ exports.create_art = catch_async_err(async (req, res) => {
 });
 
 exports.get_all_arts = catch_async_err(async (req, res) => {
-  const { page = 1, limit = 10 } = req.query; // Default page and limit values
-  const skip = (page - 1) * limit;
-
-  const found_arts = await Art.find({})
-    .populate("owner")
-    .populate("series")
-    .skip(skip)
-    .limit(Number(limit));
+  const found_arts = await Art.find({}).populate("owner").populate("series");
 
   return res.json({
     data: found_arts,
