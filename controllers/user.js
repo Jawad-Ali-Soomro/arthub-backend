@@ -109,8 +109,7 @@ exports.get_user_by_id = catch_async_err(async (req, res) => {
 });
 
 exports.get_top_users = catch_async_err(async (req, res) => {
-  const users = await User.find({});
-  // const top_ten = users.splice(0, 5);
+  const users = await User.find({}).populate("art");
   return res.json({
     users,
   });
