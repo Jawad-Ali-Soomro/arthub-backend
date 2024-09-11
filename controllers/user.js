@@ -114,3 +114,17 @@ exports.get_top_users = catch_async_err(async (req, res) => {
     users,
   });
 });
+
+exports.updateUser = catch_async_err(async (req, res) => {
+  const { userId } = req.params;
+  const findUser = await User.findByIdAndUpdate(userId, req.body);
+  if (!findUser) {
+    return res.json({
+      message: "Account Not Found!",
+    });
+  } else {
+    return res.json({
+      message: "Account Updated!",
+    });
+  }
+});
