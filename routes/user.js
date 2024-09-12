@@ -16,6 +16,6 @@ user_route.get("/profile", get_profile);
 user_route.patch("/toggle/follow", follow_unfollow_user);
 user_route.get("/get/:id", get_user_by_id);
 user_route.get("/allUsers", get_top_users);
-user_route.patch("/update/:userId", updateUser);
+user_route.post("/update/:userId", updateUser);
 
 module.exports = user_route;

@@ -5,6 +5,7 @@ const {
   get_featured_images,
   get_featured_videos,
   get_art_by_id,
+  delete_art,
 } = require("../controllers/art");
 const art_route = express.Router();
 
@@ -13,5 +14,6 @@ art_route.get("/get/all", get_all_arts);
 art_route.get("/get/featured/images", get_featured_images);
 art_route.get("/get/featured/videos", get_featured_videos);
 art_route.get("/get/art/:id", get_art_by_id);
+art_route.delete("/delete/:id", delete_art);
 
 module.exports = art_route;

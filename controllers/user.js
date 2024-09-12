@@ -117,7 +117,20 @@ exports.get_top_users = catch_async_err(async (req, res) => {
 
 exports.updateUser = catch_async_err(async (req, res) => {
   const { userId } = req.params;
-  const findUser = await User.findByIdAndUpdate(userId, req.body);
+  const links = [
+    {
+      facebook: req.body.facebook,
+      instagram: req.body.instagram,
+      twitter: req.body.twitter,
+    },
+  ];
+  console.log(links);
+
+  const findUser = await User.findByIdAndUpdate(userId, {
+    username: req.body.username,
+    handle: req.body.handle,
+    links,
+  });
   if (!findUser) {
     return res.json({
       message: "Account Not Found!",

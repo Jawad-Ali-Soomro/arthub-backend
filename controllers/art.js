@@ -2,6 +2,7 @@ const catch_async_err = require("../middlewares/async-err");
 const de_tokenize_data = require("../middlewares/de-tokenize-data");
 const Art = require("../models/art");
 const User = require("../models/user");
+const Series = require("../models/series");
 
 exports.create_art = catch_async_err(async (req, res) => {
   const { token } = req.cookies;
@@ -52,4 +53,38 @@ exports.get_art_by_id = catch_async_err(async (req, res) => {
   return res.json({
     data: found_arts,
   });
+});
+
+exports.delete_art = catch_async_err(async (req, res) => {
+  const { id } = req.params;
+  const foundArt = await Art.findById(id);
+
+  if (!foundArt) {
+    return res.json({
+      message: "Art Not Found",
+    });
+  } else {
+    const owner = await User.findById(foundArt.owner._id);
+    const series = await Series.findById(foundArt.series[0]);
+
+    if (owner) {
+      owner.art = owner.art.filter(
+        (artId) => artId.toString() !== foundArt._id.toString()
+      );
+      await owner.save();
+    }
+
+    if (series) {
+      series.art = series.art.filter(
+        (artId) => artId.toString() !== foundArt._id.toString()
+      );
+      await series.save();
+    }
+
+    await Art.findByIdAndDelete(foundArt._id);
+
+    return res.json({
+      message: "Art Deleted!",
+    });
+  }
 });

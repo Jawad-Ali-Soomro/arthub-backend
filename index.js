@@ -7,6 +7,7 @@ const user_route = require("./routes/user");
 const art_route = require("./routes/art");
 const series_route = require("./routes/series");
 const bid_route = require("./routes/bid");
+const deal_route = require("./routes/deal");
 
 const app = express();
 app.listen(process.env.PORT || 8080, () => {
@@ -23,3 +24,4 @@ app.use("/api/v1/user", user_route);
 app.use("/api/v1/art", art_route);
 app.use("/api/v1/series", series_route);
 app.use("/api/v1/bid", bid_route);
+app.use("/api/v1/deal", deal_route);
