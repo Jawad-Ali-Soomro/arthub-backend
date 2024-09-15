@@ -34,3 +34,17 @@ exports.getDeals = catch_async_err(async (req, res) => {
     });
   }
 });
+
+exports.deleteDeal = catch_async_err(async (req, res) => {
+  const { id } = req.params;
+  const foundDeal = await Deal.findOneAndDelete(id);
+  if (!foundDeal) {
+    return res.json({
+      message: "Deal Not Found!",
+    });
+  } else {
+    return res.json({
+      message: "Offer Rejected!",
+    });
+  }
+});
