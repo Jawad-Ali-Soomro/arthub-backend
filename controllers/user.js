@@ -124,20 +124,21 @@ exports.updateUser = catch_async_err(async (req, res) => {
       twitter: req.body.twitter,
     },
   ];
-  console.log(links);
-
   const findUser = await User.findByIdAndUpdate(userId, {
     username: req.body.username,
     handle: req.body.handle,
     links,
+    avatar: req.body.avatar,
   });
   if (!findUser) {
     return res.json({
       message: "Account Not Found!",
     });
   } else {
+    findUser.save();
     return res.json({
       message: "Account Updated!",
+      findUser,
     });
   }
 });

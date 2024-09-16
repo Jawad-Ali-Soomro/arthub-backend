@@ -5,16 +5,17 @@ const User = require("../models/user");
 const Series = require("../models/series");
 
 exports.create_art = catch_async_err(async (req, res) => {
-  const { token } = req.cookies;
-  const data = await de_tokenize_data({ token: token });
-  const created_art = await Art.create({ ...req.body, owner: data._id });
-  const owner = await User.findById(data._id);
-  created_art.previous_owners.push(owner._id);
+  // const { token } = req.body;
+  // const data = await de_tokenize_data({ token: token });
+  const created_art = await Art.create({ ...req.body });
+  const owner = await User.findById(req.body.owner);
+  created_art.previous_owners.push(req.body.owner);
   await created_art.save();
   owner.art.push(created_art._id);
   await owner.save();
   return res.json({
     data: created_art,
+    message: "Art Created!",
   });
 });
 

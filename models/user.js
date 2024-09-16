@@ -73,18 +73,6 @@ const user_schema = new mongoose.Schema({
       ref: "Event",
     },
   ],
-  createdBids: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Bid",
-    },
-  ],
-  Bids: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Bid",
-    },
-  ],
 });
 
 const User = mongoose.model("User", user_schema);
