@@ -44,6 +44,12 @@ const art_schema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  transactions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Transaction",
+    },
+  ],
 });
 
 const Art = mongoose.model("Art", art_schema);

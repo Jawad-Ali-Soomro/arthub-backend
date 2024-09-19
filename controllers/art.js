@@ -5,8 +5,6 @@ const User = require("../models/user");
 const Series = require("../models/series");
 
 exports.create_art = catch_async_err(async (req, res) => {
-  // const { token } = req.body;
-  // const data = await de_tokenize_data({ token: token });
   const created_art = await Art.create({ ...req.body });
   const owner = await User.findById(req.body.owner);
   created_art.previous_owners.push(req.body.owner);

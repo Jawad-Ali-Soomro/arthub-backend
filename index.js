@@ -12,6 +12,7 @@ const conversation_router = require("./routes/conversation");
 
 const app = express();
 const http = require("http");
+const transaction_route = require("./routes/transaction");
 const server = http.createServer(app);
 
 app.use(cors());
@@ -28,6 +29,7 @@ app.use("/api/v1/series", series_route);
 app.use("/api/v1/deal", deal_route);
 app.use("/api/v1/conversations", conversation_router);
 app.use("/api/v1/messages", message_router);
+app.use("/api/v1/transaction", transaction_route);
 
 server.listen(process.env.PORT || 8080, () => {
   console.log(`Server is running on port ${process.env.PORT || 8080}`);
