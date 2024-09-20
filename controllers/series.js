@@ -5,9 +5,7 @@ const Series = require("../models/series");
 const Art = require("../models/art");
 
 exports.create_series = catch_async_err(async (req, res) => {
-  const { token } = req.cookies;
-  const data = await de_tokenize_data({ token: token });
-  const id = data._id;
+  const id = req.body.userId;
   const find_user = await User.findById(id);
   const created_series = await Series.create({
     ...req.body,
@@ -16,6 +14,7 @@ exports.create_series = catch_async_err(async (req, res) => {
   find_user.series.push(created_series._id);
   await find_user.save();
   res.json({
+    message: "Series Created!",
     data: created_series,
   });
 });

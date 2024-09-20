@@ -12,9 +12,6 @@ const series_schema = new mongoose.Schema({
   image: {
     type: String,
   },
-  description: {
-    type: String,
-  },
   art: [
     {
       type: mongoose.Schema.Types.ObjectId,
